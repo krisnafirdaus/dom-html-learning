@@ -54,3 +54,40 @@ function clickMe(){
 }
 
 document.getElementById("click-me").addEventListener("click", clickMe)
+
+let dataBerita = [
+	{
+		id: 1,
+		isi: "berita 1",
+		kategori: "lifestyle"
+	},
+	{
+		id: 2,
+		isi: "berita 2",
+		kategori: "politik"
+	}
+]
+
+function tampilkanBerita(filter= "all"){
+	const daftarBerita = document.getElementById('daftar-berita');
+	daftarBerita.innerHTML = ''
+
+	dataBerita.forEach(element => {
+		if(filter === 'all' || element.kategori === filter){
+			const beritaElement = document.createElement('div');
+			beritaElement.className = 'berita-item'
+			beritaElement.innerHTML = `
+				<h3>Berita #${element.id}</h3>
+				<p>${element.isi}</p>
+				<p><strong>Kategori</strong>${element.kategori}</p>
+			`;
+			daftarBerita.appendChild(beritaElement)
+		}
+	});
+}
+
+document.getElementById('filter-kategori').addEventListener('change', function(){
+	tampilkanBerita(this.value)
+})
+
+tampilkanBerita();
